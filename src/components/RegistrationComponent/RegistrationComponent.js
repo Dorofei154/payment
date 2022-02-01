@@ -4,21 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { S } from '../../Global.styles';
 import { ROUTES } from '../../constants/routes';
 
-export const AuthComponent = () => {
-  const navigate = useNavigate()
+export const RegistrationComponent = () => {
+  
   const [form] = Form.useForm();
+  const navigate = useNavigate()
   const onReset = () => {
     form.resetFields();
   };
+  const handleAuth = () =>{
+    navigate(ROUTES.AUTH_ROUTE)
+  }
   const setFormField = (e) => {
     const key = e.target.name;
     form.setFieldsValue({
       [key] : e.target.value
     })
   }
-  const handleRegistration = () =>{
-    navigate(ROUTES.REGISTRATION_ROUTE)
-  }
+
   return (
     <S.RowAuth type="flex" justify="center" align="middle" style={{minHeight: '100vh'}}>
       <Col span={24}>
@@ -35,7 +37,7 @@ export const AuthComponent = () => {
   initialValues={{
     remember: true,
   }}
-  autoComplete="off"
+  
 >
   <Form.Item
     label="Login"
@@ -66,15 +68,16 @@ export const AuthComponent = () => {
     name='password'
     onChange={setFormField} />
   </Form.Item>
+
   <Form.Item
-    name="registration"
+    name="remember"
     wrapperCol={{
       offset: 8,
       span: 16,
     }}
   >
-    <S.ButtonLink type="link" onClick={handleRegistration} >
-      Registration
+    <S.ButtonLink type="link" onClick={handleAuth} >
+      Login
     </S.ButtonLink>
   </Form.Item>
   <Form.Item
@@ -84,7 +87,7 @@ export const AuthComponent = () => {
     }}
   >
     <Button type="primary" htmlType="submit">
-     Login
+     Registration
     </Button>
    
     <S.ButtonReset htmlType="button" onClick={onReset}>

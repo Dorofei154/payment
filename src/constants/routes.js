@@ -1,5 +1,5 @@
 export const ROUTES = {
     AUTH_ROUTE : '/',
-    LOGIN_ROUTE : '/login',
+    REGISTRATION_ROUTE : '/registration',
     SUBSCRIPTION_ROUTE : '/subscription'
 }

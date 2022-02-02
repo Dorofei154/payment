@@ -1,12 +1,23 @@
-import React from 'react';
-import {  Form, Input, Button, Checkbox , Col  }  from 'antd';
+import React, {useContext} from 'react';
+import {  Form, Input, Button, Col  }  from 'antd';
 import { useNavigate } from "react-router-dom";
 import { S } from '../../Global.styles';
 import { ROUTES } from '../../constants/routes';
+import { LoginContext } from '../../context/context';
+
 
 export const AuthComponent = () => {
   const navigate = useNavigate()
   const [form] = Form.useForm();
+  const {handleLogin} = useContext(LoginContext);
+  const handleLog = (login = form.getFieldValue().login, password = form.getFieldsValue().password ) => {
+    try{
+      handleLogin(login, password);
+      alert('you are super')
+    }catch{
+      alert('Something is a wrong, try it again later')
+    }
+  }
   const onReset = () => {
     form.resetFields();
   };
@@ -83,7 +94,7 @@ export const AuthComponent = () => {
       span: 16,
     }}
   >
-    <Button type="primary" htmlType="submit">
+    <Button type="primary" htmlType="submit" onClick={handleLog}>
      Login
     </Button>
    

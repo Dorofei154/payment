@@ -30,3 +30,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth(app);
+
+const signup = (email, password) => {
+  return createUserWithEmailAndPassword(auth, email, password);
+};
+const login = async (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
+};
+const logout = () => {
+  return signOut(auth);
+};
+
+
+export {
+  login,
+  logout,
+  signup,
+  auth
+}

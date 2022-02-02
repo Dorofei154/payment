@@ -1,13 +1,22 @@
-import React from 'react';
-import {  Form, Input, Button, Checkbox , Col  }  from 'antd';
+import React, {useContext} from 'react';
+import {  Form, Input, Button, Col  }  from 'antd';
 import { useNavigate } from "react-router-dom";
 import { S } from '../../Global.styles';
 import { ROUTES } from '../../constants/routes';
+import { LoginContext } from '../../context/context';
 
 export const RegistrationComponent = () => {
-  
+  const { handleRegistration } = useContext(LoginContext)
+ 
   const [form] = Form.useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const handleRegistr = ()=> {
+    try{
+      handleRegistration(form.getFieldValue().login, form.getFieldValue().password)
+    }catch{
+      alert('Something is a wrong, try it again later')
+    }
+    }
   const onReset = () => {
     form.resetFields();
   };
@@ -86,7 +95,7 @@ export const RegistrationComponent = () => {
       span: 16,
     }}
   >
-    <Button type="primary" htmlType="submit">
+    <Button type="primary" htmlType="submit" onClick={handleRegistr}>
      Registration
     </Button>
    

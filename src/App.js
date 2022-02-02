@@ -1,12 +1,19 @@
 import { BrowserRouter as Router  } from "react-router-dom";
 import { AppRouter } from "./components/AppRouter";
+import { LoginProvider } from "./context";
+
 
 
 function App() {
   return (
-    <Router>
+ <LoginProvider>
+
+
+<Router>
  <AppRouter />
     </Router>
+    </LoginProvider> 
+    
    
   );
 }

@@ -11,17 +11,18 @@ import { LoginContext } from "./context";
 
 function LoginProviderComponent({ children }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const state = useSelector((state) => state);
-  const setCurrentUser = useCallback((e)=>{
-    dispatch(currentUserCreator(e))
-  }
-  ,[dispatch])
+  const setCurrentUser = useCallback(
+    (e) => {
+      dispatch(currentUserCreator(e));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      console.log(state.currentUser)
     });
     return unsub;
   }, [navigate, setCurrentUser, state.currentUser]);

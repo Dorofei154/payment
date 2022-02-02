@@ -4,27 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { S } from "../../Global.styles";
 import { ROUTES } from "../../constants/routes";
 import { LoginContext } from "../../context/context";
-import { useDispatch, useSelector } from "react-redux";
-
-import { auth } from "../../firebase/firebase";
-import { ACTIONS } from "../../constants/actions";
-
 
 export const AuthComponent = () => {
-  const dispatch = useDispatch();
-  const {currentUser} = useSelector(state => state);
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const { handleLogin, handleLogout } = useContext(LoginContext);
-  useEffect(() => {
-    if(currentUser){navigate(ROUTES.SUBSCRIPTION_ROUTE)}
-  }, [navigate, currentUser]);
+
   const handleLog = (
     login = form.getFieldValue().login,
     password = form.getFieldsValue().password
   ) => {
     handleLogin(login, password);
-    
   };
 
   const onReset = () => {
@@ -106,16 +96,21 @@ export const AuthComponent = () => {
             <Button
               type="primary"
               htmlType="button"
-              onClick={(e) => {
+              onClick={() => {
                 handleLog();
+                navigate(ROUTES.SUBSCRIPTION_ROUTE);
               }}
             >
               Login
             </Button>
 
-            <S.ButtonReset htmlType="button" onClick={() => {onReset()
-            handleLogout()
-            }}>
+            <S.ButtonReset
+              htmlType="button"
+              onClick={() => {
+                onReset();
+                handleLogout();
+              }}
+            >
               Reset
             </S.ButtonReset>
           </Form.Item>
